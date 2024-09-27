@@ -1,33 +1,49 @@
 package org.example.service;
 
-import org.example.enums.CriterioOrdenacao;
 import org.example.model.Livro;
-import org.example.util.AlgoritmoOrdenacao;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BibliotecaService {
-    private Livro[] livros;
-    private int count;
+    private List<Livro> livros;
+    private int capacidade;
 
     public BibliotecaService(int capacidade) {
-        livros = new Livro[capacidade];
-        count = 0;
+        this.livros = new ArrayList<>();
+        this.capacidade = capacidade;
     }
 
     public void adicionarLivro(Livro livro) {
-        if (count < livros.length) {
-            livros[count++] = livro;
+        if (livros.size() < capacidade) {
+            livros.add(livro);
+            System.out.println("Livro adicionado com sucesso!");
         } else {
-            System.out.println("Biblioteca cheia. Não é possível adicionar mais livros.");
+            System.out.println("Capacidade máxima atingida. Não é possível adicionar mais livros.");
         }
     }
 
     public void listarLivros() {
-        for (int i = 0; i < count; i++) {
-            System.out.println(livros[i]);
+        if (livros.isEmpty()) {
+            System.out.println("Nenhum livro disponível.");
+        } else {
+            System.out.println("Lista de Livros:");
+            for (Livro livro : livros) {
+                System.out.println(livro);
+            }
         }
     }
 
-    public void ordenar(CriterioOrdenacao criterio) {
-        AlgoritmoOrdenacao.ordenar(livros, count, criterio);
+    public List<Livro> recomendarLivrosPorAutor(String autor) {
+        List<Livro> recomendados = new ArrayList<>();
+        for (Livro livro : livros) {
+            if (livro.getAutor().equalsIgnoreCase(autor)) {
+                recomendados.add(livro);
+            }
+        }
+        if (recomendados.isEmpty()) {
+            System.out.println("Nenhum livro encontrado para o autor: " + autor);
+        }
+        return recomendados;
     }
 }

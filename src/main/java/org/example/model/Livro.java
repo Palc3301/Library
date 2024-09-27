@@ -4,6 +4,14 @@ public class Livro {
     private String titulo;
     private String autor;
     private int anoPublicacao;
+    private String tema; // Adicionar campo tema
+
+    public Livro(String titulo, String autor, int anoPublicacao, String tema) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.anoPublicacao = anoPublicacao;
+        this.tema = tema;  // Inicializar o campo tema
+    }
 
     public Livro(String titulo, String autor, int anoPublicacao) {
         this.titulo = titulo;
@@ -23,8 +31,21 @@ public class Livro {
         return anoPublicacao;
     }
 
+    public String getTema() {
+        return tema;
+    }
+
+    public void setTema(String tema) {
+        this.tema = tema;
+    }
+
     @Override
     public String toString() {
-        return "Livro [Título=" + titulo + ", Autor=" + autor + ", Ano de Publicação=" + anoPublicacao + "]";
+        return "Livro{" +
+                "titulo='" + titulo + '\'' +
+                ", autor='" + autor + '\'' +
+                ", anoPublicacao=" + anoPublicacao +
+                ", tema='" + tema + '\'' +
+                '}';
     }
 }
